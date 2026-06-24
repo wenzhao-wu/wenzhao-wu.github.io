@@ -1,6 +1,7 @@
 ---
 title: "你好，世界"
 date: 2025-06-24 15:30:00 +0800
+cover: https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800
 ---
 
 这是我的第一篇博客文章。
