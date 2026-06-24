@@ -3,25 +3,11 @@ layout: default
 ---
 <article class="article">
   <header class="article-header">
-    {% if page.category %}
-    <span class="article-category">{{ page.category }}</span>
-    {% endif %}
     <h1 class="article-title">{{ page.title }}</h1>
     <div class="article-meta">
-      <span>📅 {{ page.date | date: "%Y年%m月%d日 %H:%M" }}</span>
-      {% if page.last_modified_at %}
-      <span>✏️ 更新于 {{ page.last_modified_at | date: "%Y年%m月%d日 %H:%M" }}</span>
-      {% endif %}
-      <span>✍️ {{ site.author }}</span>
-      {% if page.tags %}
-      <span>{{ page.tags | join: ", " }}</span>
-      {% endif %}
+      <span>{{ page.date | date: "%Y年%m月%d日" }}</span>
     </div>
   </header>
-
-  {% if page.cover %}
-  <img class="article-cover" src="{{ page.cover | relative_url }}" alt="封面">
-  {% endif %}
 
   <div class="article-content">
     {{ content }}
@@ -30,41 +16,11 @@ layout: default
   <footer class="article-watermark">
     <div class="watermark-source">📖 {{ site.title }}</div>
     <div class="watermark-subtitle">{{ site.subtitle }}</div>
-    <div>作者：{{ site.author }}</div>
-    <div class="watermark-meta">发布于 {{ page.date | date: "%Y年%m月%d日 %H:%M" }}{% if page.last_modified_at %} &nbsp;|&nbsp; 更新于 {{ page.last_modified_at | date: "%Y年%m月%d日 %H:%M" }}{% endif %}</div>
-    <div class="watermark-meta">{% if page.category %}{{ page.category }}{% endif %}{% if page.tags %} | {{ page.tags | join: ", " }}{% endif %}</div>
-    <div class="watermark-meta" style="margin-top:4px;">{{ site.url }}{{ page.url }}</div>
+    <div class="watermark-meta">发布于 {{ page.date | date: "%Y年%m月%d日" }}</div>
+    <div class="watermark-meta">{{ site.url }}{{ page.url }}</div>
   </footer>
 </article>
 
 <nav class="post-nav">
   <a href="{{ '/' | relative_url }}">← 返回首页</a>
-  {% assign repo_url = "https://github.com/" | append: site.github_username | append: "/" | append: site.github_username | append: ".github.io" %}
-  <a href="{{ repo_url }}/edit/main/{{ page.path }}" target="_blank" rel="noopener" title="在 GitHub 上编辑这篇文章">✏️ 编辑此页</a>
-  <button class="btn btn-sm btn-export" onclick="exportArticle()" title="导出为独立 HTML 文件">📤 导出分享</button>
 </nav>
-
-<script>
-function exportArticle() {
-  var html = '<!DOCTYPE html>\n<html lang="zh-CN">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n';
-  html += '<title>{{ page.title | escape }} - {{ site.title | escape }}</title>\n';
-  html += '<style>';
-  html += '*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Songti SC","STSong","SimSun",serif;background:#fafaf8;color:#2c2c2c;line-height:1.9}.container{max-width:780px;margin:0 auto;padding:40px 24px}.header{text-align:center;padding:40px 0 32px;border-bottom:1px solid #e0e0dc;margin-bottom:36px}.blog-name{font-size:14px;color:#8b5e3c;letter-spacing:2px}.article-category{display:inline-block;font-size:12px;color:#8b5e3c;background:#f5efe8;padding:3px 12px;border-radius:20px;margin-bottom:16px}.article-title{font-size:28px;font-weight:700;line-height:1.3;margin-bottom:16px}.article-meta{font-size:14px;color:#999;margin-bottom:8px}.article-content{font-size:17px;color:#333}.article-content p{margin-bottom:1.2em}.article-content h2,.article-content h3{margin-top:1.8em;margin-bottom:.8em}.article-content img{max-width:100%;border-radius:6px;margin:16px 0}.article-content blockquote{border-left:3px solid #8b5e3c;padding-left:16px;color:#666;margin:1em 0}.article-content pre{background:#f5f5f5;padding:16px;border-radius:6px;overflow-x:auto;font-size:14px}.article-content code{background:#f0f0f0;padding:2px 6px;border-radius:3px}.watermark{margin-top:48px;padding-top:24px;border-top:2px solid #e8e8e4;text-align:center;font-size:13px;color:#999;line-height:2}.watermark::before{content:"— ◆ —";display:block;color:#ccc;font-size:12px;margin-bottom:16px;letter-spacing:4px}.watermark .source{font-weight:600;color:#8b5e3c;font-size:15px}';
-  html += '@media print{body{background:#fff}.container{max-width:100%}}@media(max-width:640px){.article-title{font-size:22px}.container{padding:20px 16px}}</style>\n</head>\n<body>\n<div class="container">\n';
-  html += '<div class="header"><div class="blog-name">{{ site.title | escape }}</div><p style="color:#aaa;font-size:12px;">{{ site.subtitle | escape }}</p></div>\n';
-  {% if page.category %}html += '<div class="article-category">{{ page.category | escape }}</div>\n';{% endif %}
-  html += '<h1 class="article-title">{{ page.title | escape }}</h1>\n';
-  html += '<div class="article-meta">作者：{{ site.author | escape }} | 发布于 {{ page.date | date: "%Y-%m-%d %H:%M" }}{% if page.last_modified_at %} | 更新于 {{ page.last_modified_at | date: "%Y-%m-%d %H:%M" }}{% endif %}{% if page.tags %}<br>标签：{{ page.tags | join: ", " | escape }}{% endif %}</div>\n';
-  {% if page.cover %}html += '<img class="article-cover" src="{{ page.cover | escape }}" alt="封面" style="max-width:100%;border-radius:8px;margin-bottom:28px;">\n';{% endif %}
-  html += '<div class="article-content">' + document.querySelector('.article-content').innerHTML + '</div>\n';
-  html += '<div class="watermark"><div class="source">📖 {{ site.title | escape }}</div><div>作者：{{ site.author | escape }}</div><div style="font-size:12px;color:#bbb;">发布于 {{ page.date | date: "%Y-%m-%d %H:%M" }}{% if page.last_modified_at %} | 更新于 {{ page.last_modified_at | date: "%Y-%m-%d %H:%M" }}{% endif %}</div><div style="font-size:12px;color:#bbb;">{{ site.url }}{{ page.url }}</div></div>\n';
-  html += '</div>\n</body>\n</html>';
-
-  var blob = new Blob([html], {type: 'text/html;charset=UTF-8'});
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = '{{ page.title | replace: "/", "-" | replace: "\\", "-" | slice: 0, 50 }}_{{ page.date | date: "%Y%m%d" }}.html';
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-</script>

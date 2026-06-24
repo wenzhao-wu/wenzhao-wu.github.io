@@ -2,10 +2,6 @@
   <div class="footer-inner">
     <div class="footer-blog-name">{{ site.title }}</div>
     <div class="footer-subtitle">{{ site.subtitle }}</div>
-    <div class="footer-copy">
-      &copy; {{ site.time | date: '%Y' }} {{ site.author }} &nbsp;·&nbsp;
-      由 <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a> 驱动 &nbsp;·&nbsp;
-      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
-    </div>
+    <div class="footer-copy">&copy; {{ site.time | date: '%Y' }} {{ site.author }}</div>
   </div>
 </footer>
