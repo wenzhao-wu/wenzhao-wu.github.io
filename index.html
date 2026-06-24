@@ -1,0 +1,46 @@
+---
+layout: default
+title: 文章
+---
+
+<div class="home">
+  {% if site.posts.size == 0 %}
+  <div class="empty-state">
+    <div class="empty-icon">📝</div>
+    <p>还没有文章。在 GitHub 上创建第一篇吧！</p>
+    <p style="margin-top:12px;font-size:14px;color:var(--text-lighter)">
+      在 <code>_posts/</code> 文件夹新建 <code>YYYY-MM-DD-标题.md</code> 文件即可。
+    </p>
+  </div>
+  {% else %}
+
+  <div class="stats-bar">
+    <span>共 {{ site.posts.size }} 篇文章</span>
+  </div>
+
+  <div class="post-list">
+    {% for post in site.posts %}
+    <a href="{{ post.url | relative_url }}" class="post-card">
+      {% if post.cover %}
+      <div class="post-card-cover">
+        <img src="{{ post.cover | relative_url }}" alt="" loading="lazy">
+      </div>
+      {% endif %}
+      <div class="post-card-body">
+        {% if post.category %}
+        <span class="post-category">{{ post.category }}</span>
+        {% endif %}
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+        <div class="post-meta">
+          <span>🕐 {{ post.date | date: "%Y-%m-%d" }}</span>
+          {% if post.tags %}
+          <span>{{ post.tags | join: ", " }}</span>
+          {% endif %}
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>

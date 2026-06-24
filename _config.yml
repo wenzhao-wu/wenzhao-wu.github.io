@@ -1,0 +1,42 @@
+title: 既无风雨也无晴
+subtitle: 回首向来萧瑟处
+description: 记录思想，分享智慧
+author: 未署名
+email:
+
+# 时区
+timezone: Asia/Shanghai
+
+# 网址（等部署后填真实地址）
+url: ""
+baseurl: ""
+
+# 构建设置
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: /:year/:month/:day/:title/
+
+# 分页
+paginate: 10
+paginate_path: "/page/:num/"
+
+# 默认 Front Matter
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# 排除文件
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

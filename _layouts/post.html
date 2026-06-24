@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<article class="article">
+  <header class="article-header">
+    {% if page.category %}
+    <span class="article-category">{{ page.category }}</span>
+    {% endif %}
+    <h1 class="article-title">{{ page.title }}</h1>
+    <div class="article-meta">
+      <span>📅 {{ page.date | date: "%Y年%m月%d日 %H:%M" }}</span>
+      {% if page.last_modified_at %}
+      <span>✏️ 更新于 {{ page.last_modified_at | date: "%Y年%m月%d日 %H:%M" }}</span>
+      {% endif %}
+      {% if page.tags %}
+      <span>{{ page.tags | join: ", " }}</span>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if page.cover %}
+  <img class="article-cover" src="{{ page.cover | relative_url }}" alt="封面">
+  {% endif %}
+
+  <div class="article-content">
+    {{ content }}
+  </div>
+
+  <footer class="article-watermark">
+    <div class="watermark-source">📖 {{ site.title }}</div>
+    <div>作者：{{ site.author }}</div>
+    <div class="watermark-meta">发布于 {{ page.date | date: "%Y年%m月%d日 %H:%M" }}</div>
+    <div class="watermark-meta">{% if page.category %}{{ page.category }}{% endif %}{% if page.tags %} | {{ page.tags | join: ", " }}{% endif %}</div>
+  </footer>
+</article>
+
+<nav class="post-nav">
+  <a href="{{ '/' | relative_url }}">← 返回首页</a>
+</nav>
