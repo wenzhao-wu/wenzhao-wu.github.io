@@ -1,0 +1,25 @@
+---
+layout: default
+title: 文章
+---
+
+<div class="home">
+  {% if site.posts.size == 0 %}
+  <div class="empty-state">
+    <p>还没有文章。</p>
+  </div>
+  {% else %}
+
+  <div class="post-list">
+    {% for post in site.posts %}
+    <a href="{{ post.url | relative_url }}" class="post-card">
+      <div class="post-card-body">
+        <h2 class="post-title">{{ post.title }}</h2>
+        <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+        <div class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
