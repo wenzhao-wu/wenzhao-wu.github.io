@@ -211,6 +211,43 @@ body {
   border-radius: 3px; font-size: 13px; color: var(--text);
 }
 
+/* ====== Toolbar ====== */
+.toolbar { display: flex; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+.search-box {
+  flex: 1; min-width: 200px;
+  padding: 10px 16px; border: 1px solid var(--border);
+  border-radius: 6px; font-size: 15px;
+  background: var(--card); font-family: var(--sans);
+  transition: border-color 0.2s;
+}
+.search-box:focus { outline: none; border-color: var(--accent); }
+.category-select {
+  padding: 10px 16px; border: 1px solid var(--border);
+  border-radius: 6px; font-size: 15px; background: var(--card);
+  cursor: pointer; font-family: var(--sans);
+  min-width: 140px;
+}
+.category-select:focus { outline: none; border-color: var(--accent); }
+
+/* ====== Buttons (for post-nav etc) ====== */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border-radius: 6px; font-size: 14px;
+  cursor: pointer; border: 1px solid transparent;
+  font-family: var(--sans);
+  transition: all 0.2s; white-space: nowrap;
+}
+.btn-sm { padding: 5px 12px; font-size: 13px; }
+.btn-export { color: #5a8a3c; border-color: #b8d8a8; background: #fff; }
+.btn-export:hover { background: #f0f8eb; }
+
+/* ====== Post nav ====== */
+.post-nav { margin-top: 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.post-nav a {
+  color: var(--text-light); text-decoration: none; font-size: 15px;
+}
+.post-nav a:hover { color: var(--accent); }
+
 /* ====== Responsive ====== */
 @media (max-width: 640px) {
   .post-card { flex-direction: column-reverse; padding: 20px; }

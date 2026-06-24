@@ -7,20 +7,44 @@ title: 文章
   {% if site.posts.size == 0 %}
   <div class="empty-state">
     <div class="empty-icon">📝</div>
-    <p>还没有文章。在 GitHub 上创建第一篇吧！</p>
+    <p>还没有文章。去 GitHub 上创建第一篇吧！</p>
     <p style="margin-top:12px;font-size:14px;color:var(--text-lighter)">
       在 <code>_posts/</code> 文件夹新建 <code>YYYY-MM-DD-标题.md</code> 文件即可。
     </p>
+    <a href="https://github.com/{{ site.github_username | default: site.author }}/{{ site.github_username | default: site.author }}.github.io/new/main/_posts" class="btn" style="display:inline-flex;margin-top:16px;gap:6px;padding:10px 20px;background:var(--accent);color:#fff;border-radius:6px;text-decoration:none;font-size:14px;">✏️ 写第一篇文章</a>
   </div>
   {% else %}
 
+  <!-- 搜索和筛选 -->
+  <div class="toolbar">
+    <input type="text" class="search-box" id="searchInput" placeholder="🔍 搜索文章标题、内容...">
+    <select class="category-select" id="categoryFilter">
+      <option value="">📂 全部分类</option>
+      {% assign categories = site.posts | map: "category" | uniq | compact %}
+      {% for cat in categories %}
+      <option value="{{ cat }}">{{ cat }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
   <div class="stats-bar">
     <span>共 {{ site.posts.size }} 篇文章</span>
+    <span id="filterStats" style="color:var(--text-lighter);"></span>
+  </div>
+
+  <!-- 空搜索结果 -->
+  <div id="filterEmpty" class="empty-state" style="display:none;">
+    <div class="empty-icon">🔍</div>
+    <p>没有找到匹配的文章</p>
   </div>
 
   <div class="post-list">
     {% for post in site.posts %}
-    <a href="{{ post.url | relative_url }}" class="post-card">
+    <a href="{{ post.url | relative_url }}" class="post-card"
+       data-title="{{ post.title | escape }}"
+       data-excerpt="{{ post.excerpt | strip_html | escape }}"
+       data-category="{{ post.category | default: '' | escape }}"
+       data-tags="{{ post.tags | join: ' ' | escape }}">
       {% if post.cover %}
       <div class="post-card-cover">
         <img src="{{ post.cover | relative_url }}" alt="" loading="lazy">

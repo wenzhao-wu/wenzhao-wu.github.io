@@ -5,7 +5,8 @@
       <a href="{{ '/' | relative_url }}">文章</a>
       <a href="{{ '/about' | relative_url }}">关于</a>
       <a href="{{ '/archive' | relative_url }}">归档</a>
-      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      {% assign repo_url = "https://github.com/" | append: site.github_username | append: "/" | append: site.github_username | append: ".github.io" %}
+      <a href="{{ repo_url }}/new/main/_posts" target="_blank" rel="noopener" title="在 GitHub 上写新文章">✏️ 写文章</a>
     </nav>
   </div>
 </header>

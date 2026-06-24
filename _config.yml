@@ -4,11 +4,14 @@ description: 记录思想，分享智慧
 author: 未署名
 email:
 
+# GitHub 用户名（用于生成编辑链接等）
+github_username: wenzhao-wu
+
 # 时区
 timezone: Asia/Shanghai
 
-# 网址（等部署后填真实地址）
-url: ""
+# 网址
+url: "https://wenzhao-wu.github.io"
 baseurl: ""
 
 # 构建设置
@@ -22,6 +25,14 @@ permalink: /:year/:month/:day/:title/
 # 分页
 paginate: 10
 paginate_path: "/page/:num/"
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+
+feed:
+  path: feed.xml
 
 # 默认 Front Matter
 defaults:
